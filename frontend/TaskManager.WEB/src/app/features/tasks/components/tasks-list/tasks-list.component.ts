@@ -22,7 +22,7 @@ import { MatTableDataSource } from '@angular/material/table';
     MatCheckboxModule,
     MatIconModule,
     MatButtonModule,
-    MatPaginatorModule, // Importado para paginación
+    MatPaginatorModule, 
     LoaderComponent
   ],
   templateUrl: './tasks-list.component.html',
@@ -31,27 +31,25 @@ import { MatTableDataSource } from '@angular/material/table';
 export class TaskListComponent implements OnChanges {
   @Input() filters!: TaskFilter;
   tasks$!: Observable<Task[]>;
-  dataSource = new MatTableDataSource<Task>(); // Ahora usa MatTableDataSource
+  dataSource = new MatTableDataSource<Task>();
 
   loading = false;
-  displayedColumns: string[] = ['title', 'completed', 'actions']; // Columnas de la tabla
+  displayedColumns: string[] = ['title', 'completed', 'actions'];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator; // Referencia al paginador
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private taskService: TasksService) {}
 
   ngOnChanges(): void {
-    console.log('Filtros recibidos en TaskListComponent:', this.filters);
     this.loadTasks();
   }
 
   loadTasks(): void {
     this.loading = true;
     this.tasks$ = this.taskService.getAllTasks(this.filters);
-    
     this.tasks$.subscribe(tasks => {
-      this.dataSource.data = tasks || []; // Actualiza los datos de la tabla
-      this.dataSource.paginator = this.paginator; // Conecta el paginador
+      this.dataSource.data = tasks || []; 
+      this.dataSource.paginator = this.paginator; 
       this.loading = false;
     });
   }

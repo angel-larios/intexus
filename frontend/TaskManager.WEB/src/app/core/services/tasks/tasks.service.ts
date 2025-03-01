@@ -13,16 +13,17 @@ export class TasksService {
 
   getAllTasks(filters?: TaskFilter): Observable<any> {
     let url = ApiServicesUrls.tasks.getAll;
-    
     if (filters) {
+      
       const queryParams = new URLSearchParams();
       
       if (filters.title) queryParams.append('title', filters.title);
-      if (filters.isCompleted) queryParams.append('isCompleted', filters.isCompleted.toString());
+      if (filters.isCompleted != null) queryParams.append('isCompleted', filters.isCompleted.toString());
 
       if (queryParams.toString()) {
         url = `${url}?${queryParams.toString()}`;
       }
+      
     }
 
     return this.apiService.get<any>(url);
