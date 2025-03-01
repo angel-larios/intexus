@@ -30,17 +30,21 @@
      lo cual nos va ejecutar la migracion y actualizar la base de datos que creemos en memoria "SQLLite"
 
 5. **Iniciar la Aplicación**:
-   - **Desde la Línea de Comandos**: Ejecuta la aplicación con el comando:
+   - **Desde la Línea de Comandos**: Vuelve a la raiz del proyecto e ingresa al proyecto TaskManager.API:
      ```CMD
+     cd .\TaskManager.API\
+     ```
+     Ejecuta la aplicación con el comando siguiente
+      ```CMD
      dotnet run
      ```
-   - **Desde Visual Studio**: Abre el proyecto en Visual Studio y ejecuta el proyecto directamente. Esto abrirá la aplicación en el navegador predeterminado.
+   - **Desde Visual Studio**: Abre la solucion en Visual Studio, establete el proyecto TaskManager.API como proyecto de inicio y ejecuta directamente. Esto abrirá la aplicación en el navegador predeterminado.
 
-5. **Acceder a Swagger**:
+6. **Acceder a Swagger**:
    - **Desde la Línea de Comandos**: Abre tu navegador y visita [http://localhost:7066/swagger/index.html] (o la URL proporcionada en la consola).
    - **Desde Visual Studio**: La aplicación debería abrirse automáticamente en tu navegador. Si no es así, copia la URL proporcionada en la consola de salida de Visual Studio y pégala en el navegador.
 
-6. **Endpoints**:
+7. **Endpoints**:
    - **Tasks**:
      - `GET /api/tasks`: Obtiene todas las tareas, los filtros se ingresan por query string. ejemplo [https://localhost:7066/api/tasks?title=prueba&isCompleted=true]
      si no se ingresa ningun filtro devuelve todos los datos.
@@ -48,7 +52,7 @@
      - `Delete /api/tasks/{id}`: Elimina la tarea.
      - `PATCH /api/tasks/{id}`: Actualiza el estado de la tarea no se utiliza PUT ya que la actualizacion no es total, solo se le actualiza el estado en este caso la mejor opcion es PATCH.
 
-7. **Realizar Consultas**:
+8. **Realizar Consultas**:
    Utiliza la interfaz de Swagger para enviar solicitudes a los diferentes endpoints y ver las respuestas.
    Para más detalles sobre cada endpoint, consulta la documentación interactiva en Swagger.
 
