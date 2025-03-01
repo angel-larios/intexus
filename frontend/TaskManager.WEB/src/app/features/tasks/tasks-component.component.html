@@ -1,0 +1,15 @@
+<h1>Gestión de Tareas</h1>
+
+<div class="container-filter">
+    <input type="text" [(ngModel)]="filters.title" placeholder="Buscar por nombre">
+    <select [(ngModel)]="filters.isCompleted">
+    <option [ngValue]="null">Todos</option>
+    <option [ngValue]="true">Completadas</option>
+    <option [ngValue]="false">Pendientes</option>
+    </select>
+    <button class="filter-btn" (click)="applyFilters(filters.title || '', filters.isCompleted ?? null)">Filtrar</button>
+    <button class="clear-btn" (click)="clearFilters()">Limpiar</button>
+    <button class="new-task-btn" (click)="openCreateTaskModal()">Nueva Tarea</button>
+</div>
+
+<app-task-list [filters]="filters"></app-task-list>
