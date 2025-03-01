@@ -1,5 +1,5 @@
 export interface TaskFilter {
     title?: string;  
-    isCompleted?: boolean; 
+    isCompleted?: boolean | null; 
   }
   

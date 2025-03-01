@@ -14,7 +14,7 @@ import { TasksService } from '../../core/services/tasks/tasks.service';
   styleUrl: './tasks-component.component.scss'
 })
 export class TasksComponentComponent {
-  filters: TaskFilter = { title: '', isCompleted: undefined };
+  filters: TaskFilter = { title: '', isCompleted: null };
 
   constructor(private dialog: MatDialog, private taskService: TasksService) {}
 
@@ -34,14 +34,14 @@ export class TasksComponentComponent {
     });
   }
   createTask(title: string){
-      this.taskService.createTask(title).subscribe(() => this.applyFilters('', undefined));
+      this.taskService.createTask(title).subscribe(() => this.applyFilters('', null));
   }
   
-  applyFilters(title: string, isCompleted: boolean | undefined): void {
+  applyFilters(title: string, isCompleted: boolean | null): void {
     this.filters = { title, isCompleted };
   }
 
   clearFilters(): void {
-    this.filters = { title: '', isCompleted: undefined };
+    this.filters = { title: '', isCompleted: null };
   }
 }
