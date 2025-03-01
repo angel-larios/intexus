@@ -1,0 +1,11 @@
+<div class="modal-container">
+    <h2>Crear Nueva Tarea</h2>
+    <form [formGroup]="taskForm">
+      <input formControlName="title" placeholder="Título de la tarea">
+      <div class="button-container">
+        <button class="save-btn" (click)="save()" [disabled]="taskForm.invalid">Guardar</button>
+        <button class="cancel-btn" (click)="dialogRef.close()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  
