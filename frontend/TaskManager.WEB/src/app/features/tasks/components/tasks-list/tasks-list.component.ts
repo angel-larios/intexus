@@ -10,8 +10,10 @@ import { TasksService } from '../../../../core/services/tasks/tasks.service';
 import { Task } from '../../../../core/models/task.model';
 import { TaskFilter } from '../../../../core/models/tasks-filter.model';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
+import { AlertModalComponent } from '../../../../shared/components/alert-modal/alert-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-task-list',
@@ -38,7 +40,10 @@ export class TaskListComponent implements OnChanges {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private taskService: TasksService) {}
+  constructor(
+    private taskService: TasksService, 
+    private dialog: MatDialog,
+  ) {}
 
   ngOnChanges(): void {
     this.loadTasks();
@@ -47,13 +52,23 @@ export class TaskListComponent implements OnChanges {
   loadTasks(): void {
     this.loading = true;
     this.tasks$ = this.taskService.getAllTasks(this.filters);
-    this.tasks$.subscribe(tasks => {
-      this.dataSource.data = tasks || []; 
-      this.dataSource.paginator = this.paginator; 
+    this.tasks$.pipe(
+      catchError(error => {
+        this.openAlertModal('Ocurrió un error al cargar las tareas. Por favor, inténtalo de nuevo.', 'error');
+        return of([]); 
+      })
+    ).subscribe(tasks => {
+      this.dataSource.data = tasks || [];
+      this.dataSource.paginator = this.paginator;
       this.loading = false;
     });
   }
-
+  openAlertModal(message: string, type: 'success' | 'error'): void {
+    this.dialog.open(AlertModalComponent, {
+      width: '350px',
+      data: { message, type }
+    });
+  }
   deleteTask(id: string): void {
     this.loading = true;
     this.taskService.deleteTask(id).subscribe(() => this.loadTasks());

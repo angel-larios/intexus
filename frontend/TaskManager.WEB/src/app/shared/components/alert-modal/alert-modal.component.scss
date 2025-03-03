@@ -2,6 +2,29 @@
   text-align: center;
   padding: 20px;
 }
-
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface  {
+  border-radius: 16px !important;
+}
 .success { color: green; }
 .error { color: red; }
+
+button{
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  flex: 1;
+  font-size: 16px;
+}
+
+button {
+  background-color: #218838;
+}
+h2 {
+  font-family: Candara;
+}
+p {
+  font-family: Candara;
+}

@@ -16,7 +16,10 @@ import { TasksService } from '../../core/services/tasks/tasks.service';
 export class TasksComponentComponent {
   filters: TaskFilter = { title: '', isCompleted: null };
 
-  constructor(private dialog: MatDialog, private taskService: TasksService) {}
+  constructor(
+    private dialog: MatDialog, 
+    private taskService: TasksService
+  ) {}
 
   openCreateTaskModal(): void {
     const dialogRef = this.dialog.open(CreateTaskModalComponent, {
