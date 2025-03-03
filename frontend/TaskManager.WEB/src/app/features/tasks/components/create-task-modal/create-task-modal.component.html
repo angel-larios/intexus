@@ -1,4 +1,8 @@
-<div class="modal-container">
+<div *ngIf="loading" class="loader">
+  <app-loader></app-loader>
+</div>
+
+<div *ngIf="!loading" class="modal-container">
     <h2>Crear Nueva Tarea</h2>
     <form [formGroup]="taskForm">
       <input formControlName="title" placeholder="Título de la tarea">
